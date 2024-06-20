@@ -11,13 +11,13 @@ class QLearningAgent:
         self.epsilon_decay = epsilon_decay
         self.epsilon_min = epsilon_min
         self.q_table = np.zeros((env.observation_space.shape[0], env.observation_space.shape[1], env.action_space.n))
-        self.paths = []
+        self.paths = []  # To store paths for each episode
     
     def choose_action(self, state):
         if random.uniform(0, 1) < self.epsilon:
-            return self.env.action_space.sample()
+            return self.env.action_space.sample()  # Explore action space
         else:
-            return np.argmax(self.q_table[state[0], state[1]])
+            return np.argmax(self.q_table[state[0], state[1]])  # Exploit learned values
     
     def learn(self, state, action, reward, next_state):
         best_next_action = np.argmax(self.q_table[next_state[0], next_state[1]])
@@ -32,6 +32,7 @@ class QLearningAgent:
             state = tuple(np.argwhere(state == 1)[0])
             total_reward = 0
             done = False
+            path = [state]  # Track the path for the current episode
             
             while not done:
                 action = self.choose_action(state)
@@ -41,11 +42,13 @@ class QLearningAgent:
                 self.learn(state, action, reward, next_state)
                 
                 state = next_state
+                path.append(state)  # Append the current state to the path
                 total_reward += reward
             
+            self.paths.append(path)  # Save the path for this episode
             rewards.append(total_reward)
             self.epsilon = max(self.epsilon_min, self.epsilon * self.epsilon_decay)
-        
+            
         return rewards
     
     def save_paths(self, filename):
@@ -54,3 +57,4 @@ class QLearningAgent:
                 for state in path:
                     f.write(f"{state[0]},{state[1]} ")
                 f.write("\n")
+            print(f"Paths saved to {filename}")  # Debug print

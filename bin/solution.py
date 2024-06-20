@@ -31,7 +31,7 @@ def main():
     env = lm.MazeEnv(maze)
 
     agent = ql.QLearningAgent(env)
-    rewards = agent.train(episodes=500)
+    rewards = agent.train(episodes=20000)
 
     agent.save_paths('paths.txt')
 

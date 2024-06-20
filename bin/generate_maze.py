@@ -31,10 +31,14 @@ def generate_maze(x: int, y: int) -> list:
     maze[:, 0] = 1  
     maze[:, -1] = 1  
 
-    exit_x = random.randint(1, (x - 3) // 2) * 2 + 1
-    maze[-1, exit_x] = 0
+    def is_not_border(x_pos, y_pos):
+        return 1 < x_pos < x - 1 and 1 < y_pos < y - 1
 
-    maze[start_y, start_x] = 2 
-    maze[-1, exit_x] = 3 
+    exit_x, exit_y = start_x, start_y
+    while not is_not_border(exit_x, exit_y) or (exit_x == start_x and exit_y == start_y):
+        exit_x, exit_y = (random.randint(1, (x - 3) // 2) * 2 + 1, random.randint(1, (y - 3) // 2) * 2 + 1)
+
+    maze[start_y, start_x] = 2  # Mark the start point
+    maze[exit_y, exit_x] = 3    # Mark the end point
 
     return maze
