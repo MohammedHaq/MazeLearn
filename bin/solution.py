@@ -7,6 +7,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import generate_maze as gm
 import learn_maze as lm
+import q_learn as ql
 
 TOP_REPO_PATH = os.path.dirname(os.path.abspath(__file__))
 
@@ -29,18 +30,16 @@ def main():
 
     env = lm.MazeEnv(maze)
 
-    gym.envs.registration.register(
-    id='CustomMaze-v0',
-    entry_point=lm.MazeEnv,
-    max_episode_steps=100,
-    )
+    agent = ql.QLearningAgent(env)
+    rewards = agent.train(episodes=20000)
 
-    
+    agent.save_paths('paths.txt')
 
+    plt.plot(rewards)
+    plt.xlabel('Episode')
+    plt.ylabel('Total Reward')
+    plt.title('Rewards over Episodes')
+    plt.show()
 
-    
-
-
-    
 if __name__ == '__main__':
     main()
