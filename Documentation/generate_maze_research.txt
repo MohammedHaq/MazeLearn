@@ -1,0 +1,16 @@
+Creating a maze suitable for reinforcement learning involves a few steps. You need to generate a random maze that is complex enough to challenge the algorithm, and then represent this maze in a way that can be easily used by the RL algorithm. Here's a step-by-step guide to achieve this:
+
+Generate a Random Maze:
+You can use algorithms like Prim's or Kruskal's to generate a random maze. These algorithms ensure that the maze is perfect (i.e., there's exactly one path between any two points).
+
+Represent the Maze:
+The maze can be represented as a 2D array, where 0 represents a passable cell and 1 represents a wall.
+
+Ensure Complexity:
+Introduce a certain level of complexity by adding loops or multiple branches that make simple search algorithms suboptimal.
+
+---Python Scripts---
+
+1. Script to generate the maze
+2. integrate maze into a reinforcement learning environment
+3. script to train the rl agent
