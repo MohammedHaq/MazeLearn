@@ -1,19 +1,5 @@
-import os
-import sys
-import argparse
 import random
 import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
-TOP_REPO_PATH = os.path.dirname(os.path.abspath(__file__))
-
-def parse_args():
-    """Parse command-line arguments."""
-    parser = argparse.ArgumentParser(description="Description of your script")
-    parser.add_argument('-x', type=int, help='size of maze horizontally', required=True)
-    parser.add_argument('-y', type=int, help='size of the maze veritically', required=True)
-    return parser.parse_args()
 
 def generate_maze(x: int, y: int) -> list:
 
@@ -52,14 +38,3 @@ def generate_maze(x: int, y: int) -> list:
     maze[-1, exit_x] = 3 
 
     return maze
-    
-def main():
-    args = parse_args()
-
-    x = args.x
-    y = args.y
-
-    maze = generate_maze(x,y)
-
-if __name__ == '__main__':
-    main()
