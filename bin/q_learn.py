@@ -11,6 +11,7 @@ class QLearningAgent:
         self.epsilon_decay = epsilon_decay
         self.epsilon_min = epsilon_min
         self.q_table = np.zeros((env.observation_space.shape[0], env.observation_space.shape[1], env.action_space.n))
+        self.paths = []
     
     def choose_action(self, state):
         if random.uniform(0, 1) < self.epsilon:
@@ -46,3 +47,10 @@ class QLearningAgent:
             self.epsilon = max(self.epsilon_min, self.epsilon * self.epsilon_decay)
         
         return rewards
+    
+    def save_paths(self, filename):
+        with open(filename, 'w') as f:
+            for path in self.paths:
+                for state in path:
+                    f.write(f"{state[0]},{state[1]} ")
+                f.write("\n")

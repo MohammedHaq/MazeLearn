@@ -14,7 +14,7 @@ class MazeEnv(gym.Env):
         
         self.action_space = spaces.Discrete(4)
         
-        self.observation_space = spaces.Box(low=0, high=1, shape=self.maze.shape, dtype=np.int)
+        self.observation_space = spaces.Box(low=0, high=1, shape=self.maze.shape, dtype=int)
         
     def reset(self):
         self.current_pos = self.start_pos
@@ -51,7 +51,7 @@ class MazeEnv(gym.Env):
         pass
     
     def _get_obs(self):
-        obs = np.zeros_like(self.maze, dtype=np.int)
+        obs = np.zeros_like(self.maze, dtype=int)
         obs[self.current_pos] = 1
         return obs
     
