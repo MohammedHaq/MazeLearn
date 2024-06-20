@@ -14,3 +14,7 @@ Introduce a certain level of complexity by adding loops or multiple branches tha
 1. Script to generate the maze
 2. integrate maze into a reinforcement learning environment
 3. script to train the rl agent
+
+---C++ Scripts---
+
+C++ script to simulate reinforcement learning algorithm / path taken
